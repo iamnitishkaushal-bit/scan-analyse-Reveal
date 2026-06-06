@@ -1,0 +1,49 @@
+{
+  "entities": {
+    "Scan": {
+      "title": "Scan",
+      "description": "A food product ingredient scan and AI analysis record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "productName": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "ingredientsText": { "type": "string" },
+        "truthScore": { "type": "integer" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "status": { "type": "string" },
+        "ingredientsBreakdown": { "type": "array" },
+        "claims": { "type": "array" },
+        "healthImpacts": { "type": "array" },
+        "alternatives": { "type": "array" },
+        "reaction": { "type": "object" }
+      },
+      "required": ["id", "userId", "productName", "truthScore", "timestamp"]
+    },
+    "SavedProduct": {
+      "title": "SavedProduct",
+      "description": "User flagged favorite or saved product",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "scanId": { "type": "string" },
+        "productName": { "type": "string" },
+        "truthScore": { "type": "integer" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "scanId", "productName", "truthScore", "timestamp"]
+    }
+  },
+  "firestore": {
+    "scans/{scanId}": {
+      "schema": "Scan",
+      "description": "Individual product ingredients scan reports"
+    },
+    "users/{userId}/saved_products/{savedId}": {
+      "schema": "SavedProduct",
+      "description": "User saved products subcollection"
+    }
+  }
+}

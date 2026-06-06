@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Validation blueprints
+    function isValidScan(data) {
+      return data.keys().hasAll(['id', 'userId', 'productName', 'truthScore', 'timestamp'])
+        && data.id is string && data.id.size() <= 128
+        && data.userId is string && data.userId.size() <= 128
+        && data.productName is string && data.productName.size() <= 200
+        && data.truthScore is int && data.truthScore >= 0 && data.truthScore <= 100;
+    }
+
+    function isValidSavedProduct(data) {
+      return data.keys().hasAll(['id', 'userId', 'scanId', 'productName', 'truthScore', 'timestamp'])
+        && data.id is string && data.id.size() <= 128
+        && data.userId is string && data.userId.size() <= 128
+        && data.scanId is string && data.scanId.size() <= 128
+        && data.productName is string && data.productName.size() <= 200
+        && data.truthScore is int && data.truthScore >= 0 && data.truthScore <= 100;
+    }
+
+    // User access paths
+    match /scans/{scanId} {
+      allow get: if isSignedIn() && existing().userId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(scanId) && isValidScan(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isSignedIn() && existing().userId == request.auth.uid;
+    }
+
+    match /users/{userId}/saved_products/{savedId} {
+      allow get: if isSignedIn() && userId == request.auth.uid;
+      allow list: if isSignedIn() && userId == request.auth.uid;
+      allow create: if isSignedIn() && userId == request.auth.uid && isValidId(savedId) && isValidSavedProduct(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isSignedIn() && userId == request.auth.uid;
+    }
+  }
+}

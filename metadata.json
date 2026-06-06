@@ -1,0 +1,6 @@
+{
+  "name": "Ingredients Truth Scanner",
+  "description": "Scan, analyze, and reveal the truth about your food ingredients with real-time analysis, truth scores, and playful reality reveals.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
