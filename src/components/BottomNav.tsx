@@ -9,7 +9,7 @@ interface BottomNavProps {
 
 export default function BottomNav({ activeTab, setActiveTab, onScanClick }: BottomNavProps) {
   return (
-    <div className="w-full bg-[#0c0f13]/95 border-t border-gray-900 py-3.5 px-3 flex items-center justify-around">
+    <div className="w-full bg-[#0c0f13]/95 border-t border-gray-900 pt-3.5 pb-[calc(14px+env(safe-area-inset-bottom,0px))] px-3 flex items-center justify-around">
       
       {/* Home Button */}
       <button

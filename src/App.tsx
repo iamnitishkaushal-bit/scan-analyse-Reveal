@@ -28,6 +28,7 @@ export default function App() {
   // Drilldown visual view triggers
   const [isViewingReport, setIsViewingReport] = useState(false);
   const [isViewingReality, setIsViewingReality] = useState(false);
+  const [scannerStep, setScannerStep] = useState<"landing" | "camera">("landing");
 
   // Local state caches (acts as fallback when offline or Firebase handles loading)
   const [historyList, setHistoryList] = useState<ScanReport[]>([]);
@@ -288,16 +289,17 @@ export default function App() {
     setIsViewingReport(false);
     setIsViewingReality(false);
     setActiveTab("home");
+    setScannerStep("camera");
   };
 
   return (
-    <div className="min-h-screen bg-[#07090c] text-white select-none selection:bg-[#bef264]/35 selection:text-[#bef264] flex items-center justify-center relative md:p-6 overflow-x-hidden">
+    <div className="min-h-[100dvh] h-[100dvh] bg-[#07090c] text-white select-none selection:bg-[#bef264]/35 selection:text-[#bef264] flex items-center justify-center relative md:p-6 overflow-x-hidden">
       
       {/* Absolute Ambient Neon backdrop glow behind device mockup on desktop layout */}
       <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-[#bef264]/5 blur-[120px] pointer-events-none hidden md:block"></div>
 
       {/* Main Single Device Container: responsive full-width on mobile, premium iOS mockup frame on desktop */}
-      <div className="w-full h-screen md:h-[844px] md:max-w-[390px] md:rounded-[3rem] md:border-8 md:border-gray-800/95 md:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] md:shadow-emerald-500/5 relative overflow-hidden flex flex-col justify-between bg-[#020304]">
+      <div className="w-full h-[100dvh] md:h-[844px] md:max-w-[390px] md:rounded-[3rem] md:border-8 md:border-gray-800/95 md:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] md:shadow-emerald-500/5 relative overflow-hidden flex flex-col justify-between bg-[#020304]">
         
         {/* Sleek top status notch pill for smartphone decoration, only visible on desktop layout */}
         <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-[18px] bg-black rounded-full z-40 hidden md:flex items-center justify-between px-3 border border-neutral-900">
@@ -359,6 +361,8 @@ export default function App() {
                 <Scanner
                   onScanComplete={handleScanOperation}
                   isLoading={isAnalyzing}
+                  subStep={scannerStep}
+                  setSubStep={setScannerStep}
                 />
               )}
               {activeTab === "history" && (
@@ -410,6 +414,9 @@ export default function App() {
               setIsViewingReport(false);
               setIsViewingReality(false);
               setActiveTab(tab);
+              if (tab === "home") {
+                setScannerStep("landing");
+              }
             }}
             onScanClick={handleBackToScanner}
           />

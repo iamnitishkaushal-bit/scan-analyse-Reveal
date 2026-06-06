@@ -53,7 +53,7 @@ export default function RealityCheck({ report, onBack }: RealityCheckProps) {
   // Render Screen 9: Present Box Intro
   if (realityStep === "intro") {
     return (
-      <div className="flex flex-col justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-5 py-6 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl font-sans">
+      <div className="flex flex-col justify-between w-full min-h-full px-5 py-4 bg-black text-white relative font-sans">
         
         {/* Top Header */}
         <div className="flex items-center justify-between w-full">
@@ -98,7 +98,7 @@ export default function RealityCheck({ report, onBack }: RealityCheckProps) {
   // Render Screen 10: Expectation vs Reality Dog
   if (realityStep === "dog") {
     return (
-      <div className="flex flex-col justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-5 py-6 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl font-sans">
+      <div className="flex flex-col justify-between w-full min-h-full px-5 py-4 bg-black text-white relative font-sans">
         
         {/* Top Header */}
         <div className="flex items-center justify-between w-full">
@@ -197,7 +197,7 @@ export default function RealityCheck({ report, onBack }: RealityCheckProps) {
   // Render Screen 11: Shocked Joey Meme Face
   if (realityStep === "joey") {
     return (
-      <div className="flex flex-col justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-5 py-6 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl font-sans">
+      <div className="flex flex-col justify-between w-full min-h-full px-5 py-4 bg-black text-white relative font-sans">
         
         {/* Top Header */}
         <div className="flex items-center justify-between w-full font-sans">
@@ -273,7 +273,7 @@ export default function RealityCheck({ report, onBack }: RealityCheckProps) {
 
   // Render Screen 12: Sad Crying Cartoon Cat Tom Conclusion Screen
   return (
-    <div className="flex flex-col justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-5 py-6 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl font-sans font-sans">
+    <div className="flex flex-col justify-between w-full min-h-full px-5 py-4 bg-black text-white relative font-sans">
       
       {/* Top Header */}
       <div className="flex items-center justify-between w-full font-sans">

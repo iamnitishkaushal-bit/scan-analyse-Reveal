@@ -5,6 +5,8 @@ import { PRESET_OPTIONS } from "../mockData";
 interface ScannerProps {
   onScanComplete: (presetId: string, customText?: string, customName?: string) => void;
   isLoading: boolean;
+  subStep?: "landing" | "camera";
+  setSubStep?: (step: "landing" | "camera") => void;
 }
 
 // Reusable CSS Chips bag illustrations that match Lay's representation perfectly
@@ -63,13 +65,16 @@ export function MiniBeverageCan({ color = "blue" }) {
   );
 }
 
-export default function Scanner({ onScanComplete, isLoading }: ScannerProps) {
+export default function Scanner({ onScanComplete, isLoading, subStep: externalSubStep, setSubStep: externalSetSubStep }: ScannerProps) {
   // Scanner state step: "landing" (Screen 1) | "camera" (Screen 2)
-  const [subStep, setSubStep] = useState<"landing" | "camera">("landing");
+  const [localSubStep, setLocalSubStep] = useState<"landing" | "camera">("landing");
   const [useCustomText, setUseCustomText] = useState(false);
   const [ingredientsText, setIngredientsText] = useState("");
   const [customName, setCustomName] = useState("");
   const [flashlight, setFlashlight] = useState(false);
+
+  const subStep = externalSubStep !== undefined ? externalSubStep : localSubStep;
+  const setSubStep = externalSetSubStep !== undefined ? externalSetSubStep : setLocalSubStep;
 
   const handleScanProductBtnClick = () => {
     setSubStep("camera");
@@ -92,7 +97,7 @@ export default function Scanner({ onScanComplete, isLoading }: ScannerProps) {
   if (subStep === "landing") {
     // Render Screen 1: Scan. Analyze. Reveal. Landing Page
     return (
-      <div className="flex flex-col items-center justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-5 py-6 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl">
+      <div className="flex flex-col items-center justify-between w-full min-h-full px-5 py-4 bg-black text-white relative">
         
         {/* Top Status Indicators bar */}
         <div className="flex items-center justify-between w-full mb-4 px-1">
@@ -149,7 +154,7 @@ export default function Scanner({ onScanComplete, isLoading }: ScannerProps) {
 
   // Render Screen 2: Scan Product (Camera Viewfinder)
   return (
-    <div className="flex flex-col items-center justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-4 py-5 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl">
+    <div className="flex flex-col items-center justify-between w-full min-h-full px-4 py-4 bg-black text-white relative">
       
       {/* Top bar header */}
       <div className="flex items-center justify-between w-full px-1">

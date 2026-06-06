@@ -86,7 +86,7 @@ export default function Report({ report, onBack, onRevealPresent, isSaved, onTog
   if (reportState === "complete") {
     // Render Screen 4: Analysis Complete Semicircle Needle Dial Screen
     return (
-      <div className="flex flex-col justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-5 py-6 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl font-sans">
+      <div className="flex flex-col justify-between w-full min-h-full px-5 py-4 bg-black text-white relative font-sans">
         
         {/* Top bar with back and share */}
         <div className="flex items-center justify-between w-full">
@@ -171,7 +171,7 @@ export default function Report({ report, onBack, onRevealPresent, isSaved, onTog
   // Render Core Screen 5: Product Overview Detailed Dashboard Screen
   if (reportState === "overview") {
     return (
-      <div className="flex flex-col justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-5 py-6 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl font-sans">
+      <div className="flex flex-col justify-between w-full min-h-full px-5 py-4 bg-black text-white relative font-sans">
         
         {/* Top Header */}
         <div className="flex items-center justify-between w-full">
@@ -296,7 +296,7 @@ export default function Report({ report, onBack, onRevealPresent, isSaved, onTog
     const listToShow = ingredientToggle === "all" ? report.ingredientsBreakdown : report.ingredientsBreakdown.filter(i => i.rating === "Bad");
 
     return (
-      <div className="flex flex-col justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-5 py-6 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl font-sans">
+      <div className="flex flex-col justify-between w-full min-h-full px-5 py-4 bg-black text-white relative font-sans">
         
         {/* Top Header */}
         <div className="flex items-center justify-between w-full">
@@ -380,7 +380,7 @@ export default function Report({ report, onBack, onRevealPresent, isSaved, onTog
   // Render Screen 7: Claims vs Reality Screen
   if (reportState === "claims") {
     return (
-      <div className="flex flex-col justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-5 py-6 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl font-sans">
+      <div className="flex flex-col justify-between w-full min-h-full px-5 py-4 bg-black text-white relative font-sans">
         
         {/* Top Header */}
         <div className="flex items-center justify-between w-full">
@@ -446,7 +446,7 @@ export default function Report({ report, onBack, onRevealPresent, isSaved, onTog
 
   // Render Screen 8: Health Impact Screen (Concerns and alternatives)
   return (
-    <div className="flex flex-col justify-between w-full max-w-[380px] min-h-[580px] mx-auto px-5 py-6 bg-black text-white relative rounded-[2.5rem] border-8 border-gray-900 shadow-2xl font-sans">
+    <div className="flex flex-col justify-between w-full min-h-full px-5 py-4 bg-black text-white relative font-sans">
       
       {/* Top Header */}
       <div className="flex items-center justify-between w-full">
